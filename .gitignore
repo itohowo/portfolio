@@ -1,5 +1,6 @@
-.DS_Store
-node_modules
 .tmp
-.sass-cache
+*.bmpr
+.DS_Store
+*.sass-cache
 development/images/*
+node_modules
