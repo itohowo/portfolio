@@ -1,4 +1,27 @@
-body {
-	font-size: 12px; 
-	@include span(12);
-}
+@import "normalize";
+@import "compass";
+@import "susy";
+@import "breakpoint";
+
+
+$susy: (
+	columns: 		12,
+	container: 	60em,
+	gutters: 		1/4,
+	gutter-position: inside
+	);
+// $shorthand: 12 1/4 fluid float inside;
+
+//breakpoint
+$phone: 	400px		;
+$tablet:	650px		;
+$laptop:	960px		;
+$desktop:	1200px	;
+
+//fonts
+$fontfamily : 'Exo 2', 'Helvetica Neue', 'Arial', sans-serif ;
+
+$thin 							: 200 ;
+$normal 						: 400 ;
+$bold 							: 600 ;
+$heavy							: 800 ;

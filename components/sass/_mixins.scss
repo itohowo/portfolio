@@ -1,1 +1,25 @@
-$white: #fff;
+//position mixin
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+ }
+ // .foo {
+//   @include position(absolute, $top: 1em, $left: 50%);
+// }
+
+
+
+//backImage
+@mixin backImg($image, $bgSz: cover, $pos: center center) {
+	background-image:url($image);
+	background-repeat:no-repeat;
+	background-position: $pos;
+	// background-attachment: fixed; 
+	-webkit-background-size: 	$bgSz ;
+	-moz-background-size: 		$bgSz ;
+	-o-background-size: 			$bgSz ;
+	background-size: 					$bgSz ;
+}

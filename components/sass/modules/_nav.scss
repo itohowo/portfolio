@@ -1,0 +1,12 @@
+#nav{
+	.navbar{
+		@include container;
+		ul{
+			float:right;
+			li{
+				display: inline-block;
+				
+			}
+		}
+	}
+}

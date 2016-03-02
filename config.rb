@@ -1,6 +1,8 @@
 
 require "susy"
 require "breakpoint"
+require "compass-normalize"
+
 
 project_type = :stand_alone
 http_path = "/"

@@ -1,0 +1,15 @@
+#cover {
+	background-color:#272829;
+	.fullheight{
+		height: 900px;
+		width: 100%; 
+
+		@include backImg("../images/cover/firstpage.jpg", 70%);
+		.yoworld{
+			@include container;
+			text-align: center;
+			padding: 30px; 
+		}
+	}
+
+}//cover

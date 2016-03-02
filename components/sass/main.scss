@@ -1,15 +1,16 @@
 // style.scss
 // ==============
- 
-//Compass imports
-@import "compass";
-//External Libraries
-@import "susy";
-@import "breakpoint";
-
 //Core partial:
-
 @import "vars";
 @import "mixins";
 @import "base";
 @import "layout";
+
+//nodules
+
+@import "modules/cover";
+@import "modules/nav";
+@import "modules/projects";
+@import "modules/about";
+@import "modules/contact";
+
