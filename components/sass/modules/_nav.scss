@@ -1,12 +1,30 @@
 #nav{
 	.navbar{
-		@include container;
+		max-width: 80em;
+  	margin-left: auto;
+  	margin-right: auto;
+		position: relative;
+		@include clear_fix;
 		ul{
-			float:right;
+			padding-top: 10px; 
+			-webkit-box-sizing: border-box; 
+			-moz-box-sizing: border-box; 
+			box-sizing: border-box; 
+			float: right;
+			display: inline-block;
+
 			li{
-				display: inline-block;
 				
-			}
-		}
-	}
-}
+				display: inline-block;
+				a{
+					padding:10px 15px;
+					text-align: center;
+					display: inline-block;
+					text-decoration: none;
+					@include fontspec('Raleway', #333, 18px, 600);
+  				@include underline_mid_effect(#333, 2px, 0.4s);
+				}//a
+			}//li
+		}//ul
+	}//navbar
+}//nav

@@ -12,7 +12,22 @@
 
 
 
-//backImage
+//font + convert px to rem
+@mixin fontspec($face, $color, $size, $weight:400, $lineH: null){
+	
+	font-family:$face, sans-serif;
+	color:$color;
+	font-size: $size;
+  font-size: calculateRem($size);
+	font-weight: $weight;
+	line-height: $lineH; 
+}
+//convert px to rem
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+//background image
 @mixin backImg($image, $bgSz: cover, $pos: center center) {
 	background-image:url($image);
 	background-repeat:no-repeat;
@@ -23,3 +38,56 @@
 	-o-background-size: 			$bgSz ;
 	background-size: 					$bgSz ;
 }
+
+//clearfix
+@mixin clear_fix {
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	} //before, after
+	&:after {
+		clear: both;
+		
+	}//after
+}//clearfix
+
+
+//transition
+@mixin motion($what, $time, $transition:ease, $when:null){
+	-webkit-transition: $what $time $transition $when; 
+	-moz-transition: $what $time $transition $when; 
+	-ms-transition: $what $time $transition $when; 
+	-o-transition: $what $time $transition $when; 
+	transition: $what $time $transition $when; 
+}
+
+//underline effect
+@mixin underline_mid_effect($color:#333, $thickness:1px, $time:.5s, $transition:ease ) {
+
+	display: inline-block;
+	position: relative;
+
+	&:after {
+		
+		content: '';
+		display: block;
+		margin: 3px auto auto auto;
+		height: $thickness;
+		width: 0px;
+		background: transparent;
+		-webkit-transition: width $time $transition, background-color $time $transition; 
+		-moz-transition: width $time $transition, background-color $time $transition; 
+		-ms-transition: width $time $transition, background-color $time $transition; 
+		-o-transition: width $time $transition, background-color $time $transition; 
+		transition: width $time $transition, background-color $time $transition; 
+	}
+	&:hover:after {
+		width: 100%;
+		background: $color;
+		line-height: 10px; 
+	}
+}//underline_mid_effect
+
+
+

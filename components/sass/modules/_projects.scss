@@ -1,0 +1,25 @@
+#projects{
+	position: relative;
+	.tiles{
+		margin:150px 0;
+		@include container(906px);
+		background-color: #333;
+		hr{margin: 0}
+		a{	
+			@include gallery(1 of 3 1/70 before);
+			.hr{margin-bottom: 2px}
+			img{
+				vertical-align: bottom;
+				@include filter(blur(0px));
+				@include motion(-webkit-filter, .4s);
+				 
+
+				&:hover{
+					@include filter(blur(2px));
+				}//img hover
+			}//img
+		}//a
+	}//tiles
+}//projects
+
+			

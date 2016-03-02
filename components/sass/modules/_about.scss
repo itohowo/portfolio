@@ -1,0 +1,22 @@
+#about{
+	.profile{
+		padding:120px 0;
+		
+		@include container(700px);
+		article{
+					border: 1px solid;
+					@include border-radius(4px);
+					padding: 40px 80px; 
+			    overflow: auto;
+			p{ 
+				text-align: justify;
+				margin:10px 0;
+				@include fontspec('Raleway', #111, 16px);
+			}
+			img{
+				float: left;
+				margin: 0 20px 15px 0;
+			}
+		}
+	}
+}
