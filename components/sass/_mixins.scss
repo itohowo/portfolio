@@ -13,7 +13,7 @@
 
 
 //font + convert px to rem
-@mixin fontspec($face, $color, $size, $weight:400, $lineH: null){
+@mixin fontspec($face, $color, $size:16px, $weight:400, $lineH: null){
 	
 	font-family:$face, sans-serif;
 	color:$color;
@@ -27,6 +27,13 @@
   $remSize: $size / 16px;
   @return $remSize * 1rem;
 }
+
+//font-size only
+@mixin fontsize($size){
+	font-size: $size;
+  font-size: calculateRem($size);
+}
+
 //background image
 @mixin backImg($image, $bgSz: cover, $pos: center center) {
 	background-image:url($image);

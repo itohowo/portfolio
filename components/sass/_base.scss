@@ -4,6 +4,10 @@
 @import "breakpoint";
 
 
+//Sprites
+@import "../images/icons/social/*.png";
+@include all-social-sprites;
+//susy
 $susy: (
 	columns: 		12,
 	container: 	85em,

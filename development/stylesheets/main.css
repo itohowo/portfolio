@@ -226,6 +226,23 @@ th {
   padding: 0;
 }
 
+.social-sprite, .social-email, .social-facebook, .social-github {
+  background-image: url('../images/../images/icons/social-s87c09aedc8.png');
+  background-repeat: no-repeat;
+}
+
+.social-email {
+  background-position: 0 0;
+}
+
+.social-facebook {
+  background-position: 0 -24px;
+}
+
+.social-github {
+  background-position: 0 -48px;
+}
+
 a {
   text-decoration: none;
 }
@@ -238,6 +255,22 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
+  background: #E9E7D8;
+}
+
+.wrap {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  max-width: 1450px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #BCB9B4;
+}
+.wrap:after {
+  content: " ";
+  display: block;
+  clear: both;
 }
 
 .container {
@@ -262,10 +295,10 @@ body {
   background-image: url("../images/cover/firstpage2.jpg");
   background-repeat: no-repeat;
   background-position: center center;
-  -webkit-background-size: contain;
-  -moz-background-size: contain;
-  -o-background-size: contain;
-  background-size: contain;
+  -webkit-background-size: auto;
+  -moz-background-size: auto;
+  -o-background-size: auto;
+  background-size: auto;
 }
 #cover .fullheight .yoworld {
   text-align: auto;
@@ -426,40 +459,30 @@ body {
 }
 
 #contact {
-  padding: 20px;
+  padding: 50px;
   background: #333;
   color: #fff;
   text-transform: uppercase;
 }
 #contact address {
+  border: double 5px #fff;
   font-style: normal;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  max-width: 1364px;
-  margin-left: auto;
-  margin-right: auto;
-}
-#contact address:after {
-  content: " ";
-  display: block;
-  clear: both;
-}
-#contact address h4 {
-  margin: 0;
+  width: 170px;
+  padding: 30px;
+  margin-left: 300px;
   font-family: "Raleway", sans-serif;
   color: #fff;
   font-size: 16px;
   font-size: 1rem;
   font-weight: 400;
 }
+#contact address h4 {
+  margin: 0;
+}
 #contact address p {
-  margin: 10px 0 5px 0;
-  font-family: "Raleway", sans-serif;
-  color: #fff;
+  margin: 18px 0;
   font-size: 14px;
   font-size: 0.875rem;
-  font-weight: 400;
   letter-spacing: 1px;
 }
 #contact address ul {
@@ -468,12 +491,20 @@ body {
   margin: 0;
 }
 #contact address ul li {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   display: inline-block;
+  margin-right: 15px;
+  vertical-align: top;
 }
 #contact address ul li a {
-  font-family: "Raleway", sans-serif;
-  color: #fff;
-  font-size: 12px;
-  font-size: 0.75rem;
-  font-weight: 400;
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}
+#contact address ul li a span {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
 }
