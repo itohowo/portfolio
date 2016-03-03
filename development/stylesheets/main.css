@@ -273,28 +273,14 @@ body {
   clear: both;
 }
 
-.container {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  max-width: 85em;
-  margin-left: auto;
-  margin-right: auto;
-}
-.container:after {
-  content: " ";
-  display: block;
-  clear: both;
-}
-
 #cover {
   background-color: #272829;
 }
 #cover .fullheight {
-  height: 2000px;
   background-image: url("../images/cover/firstpage2.jpg");
   background-repeat: no-repeat;
   background-position: center center;
+  background-attachment: fixed;
   -webkit-background-size: auto;
   -moz-background-size: auto;
   -o-background-size: auto;
@@ -361,17 +347,22 @@ body {
 }
 
 #projects {
-  position: relative;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
 }
 #projects .tiles {
-  margin: 150px 0;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  max-width: 906px;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  background-color: #333;
+  border: 8px double white;
+  background-clip: padding-box;
+  padding: 20px;
+  background-color: #98938c;
 }
 #projects .tiles:after {
   content: " ";
@@ -422,6 +413,12 @@ body {
   filter: blur(2px);
 }
 
+#about {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+}
 #about .profile {
   padding: 120px 0;
   -moz-box-sizing: border-box;
@@ -460,7 +457,7 @@ body {
 
 #contact {
   padding: 50px;
-  background: #333;
+  background: #222;
   color: #fff;
   text-transform: uppercase;
 }

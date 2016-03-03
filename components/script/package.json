@@ -1,0 +1,21 @@
+{
+  "name": "scripts",
+  "version": "0.1.0",
+  "description": "My portfolio website",
+  "main": "script.js",
+  "scripts": {
+    "build": "browserify script.js -o ../../development/script/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ".?git"
+  },
+  "author": "Mooli",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^13.0.0"
+  },
+  "dependencies": {
+    "jquery": "^2.2.1"
+  }
+}

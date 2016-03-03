@@ -8,9 +8,6 @@
  }
  // .foo {
 //   @include position(absolute, $top: 1em, $left: 50%);
-// }
-
-
 
 //font + convert px to rem
 @mixin fontspec($face, $color, $size:16px, $weight:400, $lineH: null){
@@ -39,7 +36,7 @@
 	background-image:url($image);
 	background-repeat:no-repeat;
 	background-position: $pos;
-	// background-attachment: fixed; 
+	background-attachment: fixed; 
 	-webkit-background-size: 	$bgSz ;
 	-moz-background-size: 		$bgSz ;
 	-o-background-size: 			$bgSz ;
@@ -96,5 +93,11 @@
 	}
 }//underline_mid_effect
 
+@mixin flexbox($posinion:center){
+	display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: $posinion;
+  align-items: $posinion;
+}
 
 
