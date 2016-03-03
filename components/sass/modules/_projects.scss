@@ -15,13 +15,6 @@
 			.hr{margin-bottom: 2px}
 			img{
 				vertical-align: bottom;
-				@include filter(blur(0px));
-				@include motion(-webkit-filter, .4s);
-				 
-
-				&:hover{
-					@include filter(blur(2px));
-				}//img hover
 			}//img
 		}//a
 	}//tiles

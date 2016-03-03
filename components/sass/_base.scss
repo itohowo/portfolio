@@ -36,3 +36,12 @@ a{
 li{
 	list-style: none; 
 }
+
+.active{
+	@include motion(-webkit-filter, .5s);
+	@include filter(blur(3px));
+}//active
+.deactivate{
+	@include motion(-webkit-filter, 2s);
+	@include filter(blur(0px));
+}

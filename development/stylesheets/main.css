@@ -251,6 +251,26 @@ li {
   list-style: none;
 }
 
+.active {
+  -webkit-transition: -webkit-filter 0.5s ease;
+  -moz-transition: -webkit-filter 0.5s ease;
+  -ms-transition: -webkit-filter 0.5s ease;
+  -o-transition: -webkit-filter 0.5s ease;
+  transition: -webkit-filter 0.5s ease;
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
+}
+
+.deactivate {
+  -webkit-transition: -webkit-filter 2s ease;
+  -moz-transition: -webkit-filter 2s ease;
+  -ms-transition: -webkit-filter 2s ease;
+  -o-transition: -webkit-filter 2s ease;
+  transition: -webkit-filter 2s ease;
+  -webkit-filter: blur(0px);
+  filter: blur(0px);
+}
+
 body {
   position: absolute;
   width: 100%;
@@ -400,17 +420,6 @@ body {
 }
 #projects .tiles a img {
   vertical-align: bottom;
-  -webkit-filter: blur(0px);
-  filter: blur(0px);
-  -webkit-transition: -webkit-filter 0.4s ease;
-  -moz-transition: -webkit-filter 0.4s ease;
-  -ms-transition: -webkit-filter 0.4s ease;
-  -o-transition: -webkit-filter 0.4s ease;
-  transition: -webkit-filter 0.4s ease;
-}
-#projects .tiles a img:hover {
-  -webkit-filter: blur(2px);
-  filter: blur(2px);
 }
 
 #about {
@@ -462,7 +471,7 @@ body {
   text-transform: uppercase;
 }
 #contact address {
-  border: double 5px #fff;
+  border: double 6px #fff;
   font-style: normal;
   width: 170px;
   padding: 30px;
