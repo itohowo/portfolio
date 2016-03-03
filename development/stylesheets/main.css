@@ -262,11 +262,11 @@ li {
 }
 
 .deactivate {
-  -webkit-transition: -webkit-filter 2s ease;
-  -moz-transition: -webkit-filter 2s ease;
-  -ms-transition: -webkit-filter 2s ease;
-  -o-transition: -webkit-filter 2s ease;
-  transition: -webkit-filter 2s ease;
+  -webkit-transition: -webkit-filter 1.5s ease;
+  -moz-transition: -webkit-filter 1.5s ease;
+  -ms-transition: -webkit-filter 1.5s ease;
+  -o-transition: -webkit-filter 1.5s ease;
+  transition: -webkit-filter 1.5s ease;
   -webkit-filter: blur(0px);
   filter: blur(0px);
 }

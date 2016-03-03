@@ -33,12 +33,25 @@ $(function(){
       if (target.length) {
         $('html, body').animate({
           scrollTop: target.offset().top
-        }, 1000);
+        }, 1050);
         return false;
 	      }
 	    }
 	  });
 	});
 
+
+	//
+	$('#projects').scroll(function(){
+		
+	})
+
+	//ScrollMagic
+	var controller = new ScrollMagic.Controller();
+
+	var scene = new ScrollMagic.Scene({
+		triggerElement: '#projects'
+	})
+	.setPin('#nav').addTo(controller);
 
 });
