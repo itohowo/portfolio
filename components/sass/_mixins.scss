@@ -69,6 +69,7 @@
 }
 
 //underline effect
+
 @mixin underline_mid_effect($color:#333, $thickness:1px, $time:.5s, $transition:ease ) {
 
 	display: inline-block;
@@ -95,6 +96,7 @@
 	}
 }//underline_mid_effect
 
+//flexbox
 @mixin flexbox($posinion:center){
 	display: -webkit-flex;
   display: flex;

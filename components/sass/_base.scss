@@ -52,20 +52,12 @@ $beige : #BCB9B4 ;
 
 
 //side_nav
-// brefore
-.none{
-	display:none;
-}
+
 // after:
 .side_nav{
 	 width:150px;
 	@include position(absolute, null, 0px);
 	background: #222; 
-	
-	// @include motion(width, 2s, ease, 2s);
-	// &:hover{
-	// 	width:0;
-	// }
 	ul{
 		// border: 7px double #333;
 		z-index: 100;
@@ -78,41 +70,36 @@ $beige : #BCB9B4 ;
 			text-align: center;
 			a{
 				padding:10px 15px;
+				display: inline-block; 
 				text-decoration: none;
 				@include fontspec('Raleway', #fff, 18px, 400);
-				@include underline_mid_effect(#fff, 2px, 0.4s);
 			}//a
 		}//li
 	}//ul
 }//side_nav
 
-
-
-//backup
-// .side_nav{
-// 	 width:150px;
-// 	@include position(absolute, 0px, 0px, 0px);
-// 	background: #222; 
-
-// 	// @include motion(width, 2s, ease, 2s);
-// 	// &:hover{
-// 	// 	width:0;
-// 	// }
-// 	ul{
-// 		z-index: 999;
-// 		margin: 150px 0; 
-// 		padding:0;
-// 		display:block;
-		
-// 		li{
-// 			list-style: none;
-// 			text-align: center;
-// 			a{
-// 				padding:10px 15px;
-// 				text-decoration: none;
-// 				@include fontspec('Raleway', #fff, 18px, 400);
-// 				@include underline_mid_effect(#fff, 2px, 0.4s);
-// 			}//a
-// 		}//li
-// 	}//ul
-// }//side_nav
+//nav marked
+.marked{
+	display: inline-block;
+	position: relative;
+	&:after {
+		content: '';
+		display: block;
+		margin: 3px auto auto auto;
+		height: 1px;
+		width: 0px;
+	}
+	&:after {
+		width: 100%;
+		background: #fff;
+		line-height: 10px; 
+	}
+}
+//nav unmarked
+.unmarked{
+	transition: color ease 1s;
+	
+	&:hover{
+	color:hotpink;
+	}	
+}

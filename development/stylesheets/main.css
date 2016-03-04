@@ -273,10 +273,6 @@ li {
   filter: blur(0px);
 }
 
-.none {
-  display: none;
-}
-
 .side_nav {
   width: 150px;
   position: absolute;
@@ -298,32 +294,37 @@ li {
 }
 .side_nav ul li a {
   padding: 10px 15px;
+  display: inline-block;
   text-decoration: none;
   font-family: "Raleway", sans-serif;
   color: #fff;
   font-size: 18px;
   font-size: 1.125rem;
   font-weight: 400;
+}
+
+.marked {
   display: inline-block;
   position: relative;
 }
-.side_nav ul li a:after {
+.marked:after {
   content: '';
   display: block;
   margin: 3px auto auto auto;
-  height: 2px;
+  height: 1px;
   width: 0px;
-  background: transparent;
-  -webkit-transition: width 0.4s ease, background-color 0.4s ease;
-  -moz-transition: width 0.4s ease, background-color 0.4s ease;
-  -ms-transition: width 0.4s ease, background-color 0.4s ease;
-  -o-transition: width 0.4s ease, background-color 0.4s ease;
-  transition: width 0.4s ease, background-color 0.4s ease;
 }
-.side_nav ul li a:hover:after {
+.marked:after {
   width: 100%;
   background: #fff;
   line-height: 10px;
+}
+
+.unmarked {
+  transition: color ease 1s;
+}
+.unmarked:hover {
+  color: hotpink;
 }
 
 body {
@@ -526,17 +527,17 @@ hr {
 }
 
 #contact {
-  padding: 50px;
+  padding: 0;
   background: #222;
   color: #fff;
   text-transform: uppercase;
 }
 #contact address {
+  opacity: 0;
+  margin-left: 300px;
   border: double 6px #fff;
   font-style: normal;
   width: 170px;
-  padding: 30px;
-  margin-left: 300px;
   font-family: "Raleway", sans-serif;
   color: #fff;
   font-size: 16px;

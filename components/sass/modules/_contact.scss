@@ -1,14 +1,14 @@
 #contact{
-	padding: 50px; 
+	padding: 0; 
 	background:#222;
 	color:#fff;
 	text-transform: uppercase; 
 	address{
+		opacity: 0; 
+		margin-left: 300px; 
 		border: double 6px #fff;
 		font-style: normal; 
 		width:170px;
-		padding: 30px;
-		margin-left:300px;
 		@include fontspec('Raleway', #fff, 16px);
 		h4{
 			margin:0;
