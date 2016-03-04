@@ -59,11 +59,13 @@
 
 //transition
 @mixin motion($what, $time, $transition:ease, $when:null){
-	-webkit-transition: $what $time $transition $when; 
-	-moz-transition: $what $time $transition $when; 
-	-ms-transition: $what $time $transition $when; 
-	-o-transition: $what $time $transition $when; 
-	transition: $what $time $transition $when; 
+	-webkit-transition: $what $time $transition; 
+	-moz-transition: $what $time $transition; 
+	-ms-transition: $what $time $transition; 
+	-o-transition: $what $time $transition; 
+	transition: $what $time $transition;
+	-webkit-transition-delay: $when; /* Safari */
+	transition-delay: $when;
 }
 
 //underline effect
