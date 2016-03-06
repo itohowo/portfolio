@@ -5,11 +5,18 @@
 @import "base";
 @import "layout";
 
-//nodules
+//modules
 
 @import "modules/cover";
 @import "modules/nav";
 @import "modules/projects";
 @import "modules/about";
 @import "modules/contact";
+
+@import "normalize";
+@import "compass";
+@import "susy";
+@import "memo";
+@import "breakpoint";
+
 

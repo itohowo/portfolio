@@ -20600,8 +20600,16 @@ $(function(){
 		})
 	}
 	fullheight('.fullheight', 1);
-		fullheight('.side_nav', 2);
+	fullheight('.fullheightMid', 1.3);
+	fullheight('.side_nav', 2);
 
+	// function heightCancel(selector){
+		var winwidth = $(window).width();
+		if(winwidth === '1120px'){
+			$('.side_nav').die();
+		}
+	// heightCancel('.side_nav')
+		
 //blur effect
 	var $blur = $('.tiles a img');
 

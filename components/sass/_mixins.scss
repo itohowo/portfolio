@@ -32,11 +32,11 @@
 }
 
 //background image
-@mixin backImg($image, $bgSz: cover, $pos: center center) {
+@mixin backImg($image, $bgSz: cover, $attch:null, $pos: center center) {
 	background-image:url($image);
 	background-repeat:no-repeat;
 	background-position: $pos;
-	background-attachment: fixed; 
+	background-attachment: $attch; 
 	-webkit-background-size: 	$bgSz ;
 	-moz-background-size: 		$bgSz ;
 	-o-background-size: 			$bgSz ;

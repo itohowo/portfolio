@@ -5,10 +5,10 @@
   align-items: center;
   position: relative;
 	.tiles{
-		@include container(1000px);
+		@include container(850px);
 		border: 8px double white;
 		background-clip: padding-box;
-		padding: 20px; 
+		padding: 17px; 
 		background-color: darken($beige, 15);
 		hr{margin: 0}
 		a{	
@@ -21,4 +21,37 @@
 	}//tiles
 }//projects
 
-			
+
+// #projects{
+// 	position: relative;
+	
+// 	@include breakpoint($fullWin){
+
+// 		container{
+
+// 	  	@include flexbox(center);
+	  	
+// 		  .tiles{
+// 				@include container(850px);
+// 				border: 8px double white;
+// 				background-clip: padding-box;
+// 				padding: 17px; 
+// 				background-color: darken($beige, 15);
+// 				hr{margin: 0}
+// 				a{	
+// 					@include gallery(1 of 3 1/70 before);
+// 					.hr{margin-bottom: 2px}
+// 					img{
+// 						vertical-align: bottom;
+// 					}//img
+// 				}//a
+// 			}//tiles
+// 		}//container
+//   }//$fullWin
+	
+	
+//   //breakpoint
+	
+  
+	
+// }//projects

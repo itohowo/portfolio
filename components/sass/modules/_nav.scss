@@ -1,30 +1,63 @@
 #nav{
 	.navbar{
-		max-width: 80em;
-  	margin-left: auto;
-  	margin-right: auto;
-		position: relative;
-		@include clear_fix;
-		ul{
-			padding-top: 10px; 
-			-webkit-box-sizing: border-box; 
-			-moz-box-sizing: border-box; 
-			box-sizing: border-box; 
-			float: right;
+		@include container(30% right);
+		ul{	 
 			display: inline-block;
-
+			
 			li{
-				
 				display: inline-block;
 				a{
 					padding:10px 15px;
 					text-align: center;
 					display: inline-block;
 					text-decoration: none;
-					@include fontspec('Raleway', #333, 18px, 600);
+					@include fontspec('Raleway', #333, 16px, $bold);
   				@include underline_mid_effect(#333, 2px, 0.4s);
 				}//a
 			}//li
 		}//ul
 	}//navbar
 }//nav
+
+//side_nav
+.side_nav{
+
+	background: #222;
+	//breakpoint
+	@include breakpoint($fullWin){
+
+		width:130px;
+		@include position(absolute, 0, 0);
+
+		ul{display:block;
+		@include position(relative, 15%, 0px);
+		margin: 0 15px; 
+		padding:5px;
+		}//ul
+	}//$fullWin
+	@include breakpoint($halfWin){
+		display: block;
+		-webkit-align-self:flex-start;  
+		align-self:flex-start;
+		ul{
+			li{
+				display:inline-block;
+			}
+		}//ul
+	}//$halfWin
+	
+	ul{
+		// border: 7px double #333;
+		z-index: 100;
+		li{
+			list-style: none;
+			text-align: center;
+			a{
+				padding:10px 15px;
+				display: inline-block; 
+				text-decoration: none;
+				@include fontspec('Raleway', #fff, 16px, $normal);
+			}//a
+		}//li
+	}//ul
+}//side_nav

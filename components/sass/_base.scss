@@ -1,6 +1,8 @@
+//External Libraries
 @import "normalize";
 @import "compass";
 @import "susy";
+@import "memo";
 @import "breakpoint";
 
 
@@ -20,8 +22,8 @@ $susy: (
 //breakpoint
 $phone: 	400px		;
 $tablet:	650px		;
-$laptop:	960px		;
-$desktop:	1200px	;
+$halfWin:	1120px 960px ;
+$fullWin:	1120px	;
 
 //fonts
 
@@ -54,29 +56,7 @@ $beige : #BCB9B4 ;
 //side_nav
 
 // after:
-.side_nav{
-	 width:150px;
-	@include position(absolute, null, 0px);
-	background: #222; 
-	ul{
-		// border: 7px double #333;
-		z-index: 100;
-		margin: 0 20px; 
-		padding:7px;
-		display:block;
-		@include position(relative, 15%, 0px);
-		li{
-			list-style: none;
-			text-align: center;
-			a{
-				padding:10px 15px;
-				display: inline-block; 
-				text-decoration: none;
-				@include fontspec('Raleway', #fff, 18px, 400);
-			}//a
-		}//li
-	}//ul
-}//side_nav
+
 
 //nav marked
 .marked{
