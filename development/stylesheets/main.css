@@ -432,20 +432,36 @@ hr {
   line-height: 10px;
 }
 
-#side_nav {
-  -webkit-order: -1;
-  order: -1;
+#secondary_nav {
   background: #222;
 }
-#side_nav ul {
-  z-index: 100;
-  text-align: center;
+@media (min-width: 1170px) {
+  #secondary_nav {
+    width: 130px;
+    text-align: center;
+    display: inline-block;
+    float: right;
+  }
 }
-#side_nav ul li {
+@media (min-width: 960px) and (max-width: 1170px) {
+  #secondary_nav {
+    width: 100%;
+    display: block;
+  }
+  #secondary_nav ul li {
+    display: inline-block;
+  }
+}
+#secondary_nav ul {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+#secondary_nav ul li {
   list-style: none;
 }
-#side_nav ul li a {
-  padding: 10px 15px;
+#secondary_nav ul li a {
+  padding: 15px 25px;
   display: inline-block;
   text-decoration: none;
   font-family: "Raleway", sans-serif;
@@ -453,31 +469,6 @@ hr {
   font-size: 16px;
   font-size: 1rem;
   font-weight: 400;
-}
-
-.fullheightX {
-  width: 130px;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.fullheightX ul {
-  position: relative;
-  top: 15%;
-  right: 0px;
-  display: block;
-  margin: 0 15px;
-  padding: 5px;
-}
-
-.wide_bar {
-  width: 100%;
-  display: block;
-  -webkit-align-self: flex-start;
-  align-self: flex-start;
-}
-.wide_bar ul li {
-  display: inline-block;
 }
 
 #projects {

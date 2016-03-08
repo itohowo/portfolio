@@ -11,10 +11,9 @@ body {
 
 .wrap{
 	@include container(1200px);
-	background : $beige ; 
+	background : $beige ;
 }
 
 hr{
 	margin:0;
-
 }
