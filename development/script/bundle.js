@@ -35622,11 +35622,15 @@ function checkSize(){
 					$(window).resize(function(){
 					$('#secondary_nav').removeAttr("style");
 					})//resize
-				}
+				}//else
 		  }//checkSize
 
+
+//document ready//
 $(function(){
-		//calling fullheight
+
+
+	//calling fullheight
 		fullheight('.fullheight', 1);
 		fullheight('.fullheightMid', 1.3);
 	
@@ -35637,11 +35641,42 @@ $(function(){
     // run test on resize of the window
     $(window).resize(checkSize);
 
-    //Function to the css rule
+  //ScrollMagic
+	var controller = new ScrollMagic.Controller();
+
 		
+	//second nav slide in effect
+	{
+	var scndNavXslid = function(){
+		if($("#secondary_nav").css("float") == "right" ){
+			TweenLite.fromTo('#secondary_nav', 0.6, {opacity:.3, width:0}, {opacity:1, width:130, delay:0.4, ease:Elastic.easeOut} )
+			TweenMax.staggerFrom(".btn", 2, {x:-100, scale:0, opacity:0, delay:0.9, ease:Elastic.easeOut}, 0.2)
+			}//if
+			else{
+			TweenLite.from('#secondary_nav', 0.6, {opacity:.3, height:0,delay:0.5, ease:Elastic.easeOut} )
+			TweenMax.staggerFrom(".btn", 2, {y:-50, scale:0, opacity:0, delay:0.9, ease:Elastic.easeOut}, 0.3);
+			}	
+		}
+	}
+var scene = new ScrollMagic.Scene({
+		triggerElement: '#projects',
+		offset: 20,
+		triggerHook:0
+	}).setTween(scndNavXslid).addTo(controller);	
 
+	//end of slide
+scene = new ScrollMagic.Scene({
+				triggerElement: '#projects',
+				triggerHook:0.5,
+				offset:0,
+				duration: '110%'
+			}).setPin('#secondary_nav').addTo(controller);
+	//pin second nav
+	
 
-//blur effect
+	//end of pin
+
+	//blur effect
 	var $blur = $('.tiles a img');
 
 		$blur.mouseenter(function(){
@@ -35655,7 +35690,7 @@ $(function(){
 			})
 		})
 
-
+		//smooth mouse
   $('a[href*="#"]:not([href="#"])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
       var target = $(this.hash);
@@ -35670,7 +35705,7 @@ $(function(){
 	  });
 
 
-});
+});//doc.ready
 
 	
 
