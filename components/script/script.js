@@ -21,14 +21,18 @@ $(function(){
 	}
 	fullheight('.fullheight', 1);
 	fullheight('.fullheightMid', 1.3);
-	fullheight('.side_nav', 2);
+	
 
-	// function heightCancel(selector){
-		var winwidth = $(window).width();
-		if(winwidth === '1120px'){
-			$('.side_nav').die();
-		}
-	// heightCancel('.side_nav')
+	//height toggle
+	$(window).resize(function(){
+    var winWidth = $(window).width()
+    if(winWidth > 1240){
+    $('.side_nav').addClass('fullheightX')
+    fullheight('.fullheightX', 2);
+  }else{
+    $('.side_nav').removeClass('fullheightX');
+      }
+    })
 		
 //blur effect
 	var $blur = $('.tiles a img');
