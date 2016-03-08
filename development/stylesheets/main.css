@@ -335,7 +335,7 @@ hr {
   margin-right: auto;
   background-image: url("../images/cover/firstpage2.jpg");
   background-repeat: no-repeat;
-  background-position: 50% 60%;
+  background-position: 50% -225px;
   -webkit-background-size: 1100px;
   -moz-background-size: 1100px;
   -o-background-size: 1100px;
@@ -347,7 +347,8 @@ hr {
   clear: both;
 }
 #cover .fullheightMid .yoworld {
-  margin-top: 200px;
+  position: relative;
+  top: 200px;
   text-align: center;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -381,26 +382,19 @@ hr {
   margin: 0;
 }
 
-#nav .navbar {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  max-width: 30%;
-  margin-left: auto;
-  margin-right: 0;
+#nav {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row-reverse;
 }
-#nav .navbar:after {
-  content: " ";
-  display: block;
-  clear: both;
+#nav ul {
+  padding: 0;
+  margin-right: 30px;
 }
-#nav .navbar ul {
+#nav ul li {
   display: inline-block;
 }
-#nav .navbar ul li {
-  display: inline-block;
-}
-#nav .navbar ul li a {
+#nav ul li a {
   padding: 10px 15px;
   text-align: center;
   display: inline-block;
@@ -413,7 +407,7 @@ hr {
   display: inline-block;
   position: relative;
 }
-#nav .navbar ul li a:after {
+#nav ul li a:after {
   content: '';
   display: block;
   margin: 3px auto auto auto;
@@ -426,35 +420,29 @@ hr {
   -o-transition: width 0.4s ease, background-color 0.4s ease;
   transition: width 0.4s ease, background-color 0.4s ease;
 }
-#nav .navbar ul li a:hover:after {
+#nav ul li a:hover:after {
   width: 100%;
   background: #333;
   line-height: 10px;
 }
 
+@media (min-width: 400px) and (max-width: 1019px) {
+  #nav {
+    -webkit-justify-content: center;
+    justify-content: center;
+  }
+  #nav ul {
+    margin-right: 0;
+  }
+}
 #secondary_nav {
   background: #222;
-}
-@media (min-width: 1170px) {
-  #secondary_nav {
-    width: 130px;
-    text-align: center;
-    display: inline-block;
-    float: right;
-  }
-}
-@media (min-width: 960px) and (max-width: 1170px) {
-  #secondary_nav {
-    width: 100%;
-    display: block;
-  }
-  #secondary_nav ul li {
-    display: inline-block;
-  }
+  width: 130px;
+  display: inline-block;
+  float: right;
 }
 #secondary_nav ul {
   text-align: center;
-  margin: 0;
   padding: 0;
 }
 #secondary_nav ul li {
@@ -471,6 +459,19 @@ hr {
   font-weight: 400;
 }
 
+@media (min-width: 400px) and (max-width: 980px) {
+  #secondary_nav {
+    width: 100%;
+    display: block;
+    float: none;
+  }
+  #secondary_nav ul {
+    margin: 0 auto;
+  }
+  #secondary_nav ul li {
+    display: inline-block;
+  }
+}
 #projects {
   display: -webkit-flex;
   display: flex;

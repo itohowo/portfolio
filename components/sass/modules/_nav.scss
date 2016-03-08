@@ -1,51 +1,46 @@
+//global
 #nav{
-	.navbar{
-		@include container(30% right);
-		ul{	 
+	display: -webkit-flex;
+ 	display: flex;
+ 	flex-direction: row-reverse;
+	ul{
+		padding: 0;
+		margin-right: 30px;
+		li{
 			display: inline-block;
-			
-			li{
+			a{
+				padding:10px 15px;
+				text-align: center;
 				display: inline-block;
-				a{
-					padding:10px 15px;
-					text-align: center;
-					display: inline-block;
-					text-decoration: none;
-					@include fontspec('Raleway', #333, 16px, $bold);
-  				@include underline_mid_effect(#333, 2px, 0.4s);
-				}//a
-			}//li
-		}//ul
-	}//navbar
+				text-decoration: none;
+				@include fontspec('Raleway', #333, 16px, $bold);
+				@include underline_mid_effect(#333, 2px, 0.4s);
+			}//a
+		}//li
+	}//ul
 }//nav
+
+@include breakpoint($phone 1019px){
+	#nav{
+		-webkit-justify-content: center;
+    justify-content: center;
+		ul{
+			margin-right: 0;
+		}//ul
+	}//nav
+}//halfwin
+
 
 
 
 //secondary_nav
-#secondary_nav{	
-	@include breakpoint($fullWin){
-		width:130px;
-		text-align: center;
-		display: inline-block;
-		float: right;
-	}//fullwidth
-	@include breakpoint($halfWin){
-		width:100%;
-		display: block;
-		
-		ul{
-			li{
-				display:inline-block;		
-			}//li
-		}//ul
-	}//halfWin
-	@include breakpoint($tablet){
-		
-		}//tablet
+#secondary_nav{
 	background: #222;
+	width:130px;
+	display: inline-block;
+	float: right;
 	ul{
 		text-align: center;
-		margin:0;
 		padding:0;
 		li{
 			list-style: none;
@@ -58,4 +53,19 @@
 		}//li
 	}//ul
 }//secondary_nav
+
+@include breakpoint($phone $halfWin){
+	#secondary_nav{
+		width:100%;
+		display: block;
+		float:none;
+	ul{
+		margin:0 auto;
+		li{
+				display:inline-block;		
+			}//li
+		}//ul
+	}//secondary_nav
+}//halfWin
+
 

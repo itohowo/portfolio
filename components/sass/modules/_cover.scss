@@ -4,9 +4,9 @@
 	
 	.fullheightMid{
 		@include container(94%);
-		@include backImg("../images/cover/firstpage2.jpg", 1100px,null, 50% 60%);
+		@include backImg("../images/cover/firstpage2.jpg", 1100px,null, 50% -225px);
 		.yoworld{
-			margin-top: 200px; 
+			@include position(relative, 200px);
 			text-align: center;
 			@include container(80%);
 			background: #000;
