@@ -3,6 +3,8 @@
   display: flex;
   -webkit-align-items: center;
   align-items: center;
+  display: flex;
+    -webkit-flex-wrap: wrap;
   position: relative;
 	.tiles{
 		@include container(850px);

@@ -1,5 +1,6 @@
 //requires
 var $ = require('jquery');
+var jquery_ui = require('jquery-ui');
 var TweenMax = require('gsap');
 var ScrollMagic = require('scrollmagic');
 var animation_gsap = require('./plugin/jquery.ScrollMagic.js');
@@ -21,16 +22,22 @@ $(function(){
 	}
 	fullheight('.fullheight', 1);
 	fullheight('.fullheightMid', 1.3);
+	fullheight('.fullheightX', 2);
 	
+	// function fullwidth(selector, asWideas){
+	// 	$(selector).css('width', winheight * tims);	
+	// }
 
 	//height toggle
 	$(window).resize(function(){
-    var winWidth = $(window).width()
-    if(winWidth > 1240){
-    $('.side_nav').addClass('fullheightX')
-    fullheight('.fullheightX', 2);
+    var winWidth = $(window).outerWidth(true)
+    console.log(winWidth)
+    if(winWidth > 1100){
+    	fullheight('.fullheightX', 2);
+    $( "#side_nav").switchClass( "wide_bar", "fullheightX", 450 );
   }else{
-    $('.side_nav').removeClass('fullheightX');
+    $( "#side_nav").removeAttr("style");
+		$( "#side_nav" ).switchClass( "fullheightX", "wide_bar", 450 );
       }
     })
 		
@@ -76,27 +83,27 @@ var controller = new ScrollMagic.Controller();
 	//side nav follow
 	
 
-	var scene = new ScrollMagic.Scene({
-		triggerElement: '.tiles',
-		triggerHook:0.3,
-		offset:50,
-		duration: '110%'
-	})
-	.setPin('.side_nav ul').addTo(controller);
+	// var scene = new ScrollMagic.Scene({
+	// 	triggerElement: '.tiles',
+	// 	triggerHook:0.3,
+	// 	offset:50,
+	// 	duration: '110%'
+	// })
+	// .setPin('.fullheightX ul').addTo(controller);
 	//end
 
 	//side nav slide in effect
 
-	var side_nav = function(){
-		TweenLite.from('.side_nav', 0.9, {opacity:.5, width:0});
-		TweenLite.from('.side_nav ul', 1, {opacity:0, y:100, delay:0.7});
+	var side_nav_fullhight = function(){
+		TweenLite.fromTo('.fullheightX', 0.9, {opacity:.5, width:0},{opacity:1, width:130});
+		TweenLite.from('.fullheightX ul', 1, {opacity:0, y:100, delay:0.7});
 	}
 
 	var scene = new ScrollMagic.Scene({
 		triggerElement: '#projects',
 		offset: 0,
 		triggerHook:1
-	}).setTween(side_nav).addTo(controller);	
+	}).setTween(side_nav_fullhight).addTo(controller);	
 
 //
 
@@ -109,14 +116,14 @@ new ScrollMagic.Scene({triggerElement: "#about", triggerHook:0.5})
 
 		.addTo(controller);
 	
-	new ScrollMagic.Scene({triggerElement: "#contact adress",offset:2000 })
+	new ScrollMagic.Scene({triggerElement: "#contact_a",offset:2000 })
 		.setClassToggle("#tocontact", "marked") // add class toggle
 
 		.addTo(controller);
 
 
 		//nav transision hotpink
-		var side_links = $('.side_nav ul li a');
+		var side_links = $('#side_nav ul li a');
 		$(side_links).mouseenter(function(){
 			$(this).addClass('unmarked');
 			$(this).mouseleave(function(){
