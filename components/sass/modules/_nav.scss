@@ -1,5 +1,6 @@
 //global
 #nav{
+	z-index: 999; 
 	display: -webkit-flex;
  	display: flex;
  	flex-direction: row-reverse;
@@ -35,6 +36,7 @@
 
 //secondary_nav
 #secondary_nav{
+	z-index: 999;
 	background: #222;
 	width:130px;
 	display: inline-block;

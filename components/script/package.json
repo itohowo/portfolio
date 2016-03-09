@@ -15,7 +15,8 @@
   "license": "ISC",
   "devDependencies": {
     "browserify": "^13.0.0",
-    "watchify": "^3.7.0"
+    "watchify": "^3.7.0",
+    "debug_addIndicators": "require('./plugin/debug.addIndicators.js')"
   },
   "dependencies": {
     "gsap": "^1.18.2",
