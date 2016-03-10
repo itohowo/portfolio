@@ -15,10 +15,11 @@
   "license": "ISC",
   "devDependencies": {
     "browserify": "^13.0.0",
-    "watchify": "^3.7.0",
-    "debug_addIndicators": "require('./plugin/debug.addIndicators.js')"
+    "debug_addIndicators": "require('./plugin/debug.addIndicators.js')",
+    "watchify": "^3.7.0"
   },
   "dependencies": {
+    "enquire.js": "^2.1.1",
     "gsap": "^1.18.2",
     "jquery": "^2.2.1",
     "jquery-ui": "^1.10.5",

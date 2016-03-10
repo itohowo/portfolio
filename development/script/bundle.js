@@ -1,4 +1,298 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/*!
+ * enquire.js v2.1.1 - Awesome Media Queries in JavaScript
+ * Copyright (c) 2014 Nick Williams - http://wicky.nillia.ms/enquire.js
+ * License: MIT (http://www.opensource.org/licenses/mit-license.php)
+ */
+
+;(function (name, context, factory) {
+	var matchMedia = window.matchMedia;
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = factory(matchMedia);
+	}
+	else if (typeof define === 'function' && define.amd) {
+		define(function() {
+			return (context[name] = factory(matchMedia));
+		});
+	}
+	else {
+		context[name] = factory(matchMedia);
+	}
+}('enquire', this, function (matchMedia) {
+
+	'use strict';
+
+    /*jshint unused:false */
+    /**
+     * Helper function for iterating over a collection
+     *
+     * @param collection
+     * @param fn
+     */
+    function each(collection, fn) {
+        var i      = 0,
+            length = collection.length,
+            cont;
+
+        for(i; i < length; i++) {
+            cont = fn(collection[i], i);
+            if(cont === false) {
+                break; //allow early exit
+            }
+        }
+    }
+
+    /**
+     * Helper function for determining whether target object is an array
+     *
+     * @param target the object under test
+     * @return {Boolean} true if array, false otherwise
+     */
+    function isArray(target) {
+        return Object.prototype.toString.apply(target) === '[object Array]';
+    }
+
+    /**
+     * Helper function for determining whether target object is a function
+     *
+     * @param target the object under test
+     * @return {Boolean} true if function, false otherwise
+     */
+    function isFunction(target) {
+        return typeof target === 'function';
+    }
+
+    /**
+     * Delegate to handle a media query being matched and unmatched.
+     *
+     * @param {object} options
+     * @param {function} options.match callback for when the media query is matched
+     * @param {function} [options.unmatch] callback for when the media query is unmatched
+     * @param {function} [options.setup] one-time callback triggered the first time a query is matched
+     * @param {boolean} [options.deferSetup=false] should the setup callback be run immediately, rather than first time query is matched?
+     * @constructor
+     */
+    function QueryHandler(options) {
+        this.options = options;
+        !options.deferSetup && this.setup();
+    }
+    QueryHandler.prototype = {
+
+        /**
+         * coordinates setup of the handler
+         *
+         * @function
+         */
+        setup : function() {
+            if(this.options.setup) {
+                this.options.setup();
+            }
+            this.initialised = true;
+        },
+
+        /**
+         * coordinates setup and triggering of the handler
+         *
+         * @function
+         */
+        on : function() {
+            !this.initialised && this.setup();
+            this.options.match && this.options.match();
+        },
+
+        /**
+         * coordinates the unmatch event for the handler
+         *
+         * @function
+         */
+        off : function() {
+            this.options.unmatch && this.options.unmatch();
+        },
+
+        /**
+         * called when a handler is to be destroyed.
+         * delegates to the destroy or unmatch callbacks, depending on availability.
+         *
+         * @function
+         */
+        destroy : function() {
+            this.options.destroy ? this.options.destroy() : this.off();
+        },
+
+        /**
+         * determines equality by reference.
+         * if object is supplied compare options, if function, compare match callback
+         *
+         * @function
+         * @param {object || function} [target] the target for comparison
+         */
+        equals : function(target) {
+            return this.options === target || this.options.match === target;
+        }
+
+    };
+    /**
+     * Represents a single media query, manages it's state and registered handlers for this query
+     *
+     * @constructor
+     * @param {string} query the media query string
+     * @param {boolean} [isUnconditional=false] whether the media query should run regardless of whether the conditions are met. Primarily for helping older browsers deal with mobile-first design
+     */
+    function MediaQuery(query, isUnconditional) {
+        this.query = query;
+        this.isUnconditional = isUnconditional;
+        this.handlers = [];
+        this.mql = matchMedia(query);
+
+        var self = this;
+        this.listener = function(mql) {
+            self.mql = mql;
+            self.assess();
+        };
+        this.mql.addListener(this.listener);
+    }
+    MediaQuery.prototype = {
+
+        /**
+         * add a handler for this query, triggering if already active
+         *
+         * @param {object} handler
+         * @param {function} handler.match callback for when query is activated
+         * @param {function} [handler.unmatch] callback for when query is deactivated
+         * @param {function} [handler.setup] callback for immediate execution when a query handler is registered
+         * @param {boolean} [handler.deferSetup=false] should the setup callback be deferred until the first time the handler is matched?
+         */
+        addHandler : function(handler) {
+            var qh = new QueryHandler(handler);
+            this.handlers.push(qh);
+
+            this.matches() && qh.on();
+        },
+
+        /**
+         * removes the given handler from the collection, and calls it's destroy methods
+         * 
+         * @param {object || function} handler the handler to remove
+         */
+        removeHandler : function(handler) {
+            var handlers = this.handlers;
+            each(handlers, function(h, i) {
+                if(h.equals(handler)) {
+                    h.destroy();
+                    return !handlers.splice(i,1); //remove from array and exit each early
+                }
+            });
+        },
+
+        /**
+         * Determine whether the media query should be considered a match
+         * 
+         * @return {Boolean} true if media query can be considered a match, false otherwise
+         */
+        matches : function() {
+            return this.mql.matches || this.isUnconditional;
+        },
+
+        /**
+         * Clears all handlers and unbinds events
+         */
+        clear : function() {
+            each(this.handlers, function(handler) {
+                handler.destroy();
+            });
+            this.mql.removeListener(this.listener);
+            this.handlers.length = 0; //clear array
+        },
+
+        /*
+         * Assesses the query, turning on all handlers if it matches, turning them off if it doesn't match
+         */
+        assess : function() {
+            var action = this.matches() ? 'on' : 'off';
+
+            each(this.handlers, function(handler) {
+                handler[action]();
+            });
+        }
+    };
+    /**
+     * Allows for registration of query handlers.
+     * Manages the query handler's state and is responsible for wiring up browser events
+     *
+     * @constructor
+     */
+    function MediaQueryDispatch () {
+        if(!matchMedia) {
+            throw new Error('matchMedia not present, legacy browsers require a polyfill');
+        }
+
+        this.queries = {};
+        this.browserIsIncapable = !matchMedia('only all').matches;
+    }
+
+    MediaQueryDispatch.prototype = {
+
+        /**
+         * Registers a handler for the given media query
+         *
+         * @param {string} q the media query
+         * @param {object || Array || Function} options either a single query handler object, a function, or an array of query handlers
+         * @param {function} options.match fired when query matched
+         * @param {function} [options.unmatch] fired when a query is no longer matched
+         * @param {function} [options.setup] fired when handler first triggered
+         * @param {boolean} [options.deferSetup=false] whether setup should be run immediately or deferred until query is first matched
+         * @param {boolean} [shouldDegrade=false] whether this particular media query should always run on incapable browsers
+         */
+        register : function(q, options, shouldDegrade) {
+            var queries         = this.queries,
+                isUnconditional = shouldDegrade && this.browserIsIncapable;
+
+            if(!queries[q]) {
+                queries[q] = new MediaQuery(q, isUnconditional);
+            }
+
+            //normalise to object in an array
+            if(isFunction(options)) {
+                options = { match : options };
+            }
+            if(!isArray(options)) {
+                options = [options];
+            }
+            each(options, function(handler) {
+                queries[q].addHandler(handler);
+            });
+
+            return this;
+        },
+
+        /**
+         * unregisters a query and all it's handlers, or a specific handler for a query
+         *
+         * @param {string} q the media query to target
+         * @param {object || function} [handler] specific handler to unregister
+         */
+        unregister : function(q, handler) {
+            var query = this.queries[q];
+
+            if(query) {
+                if(handler) {
+                    query.removeHandler(handler);
+                }
+                else {
+                    query.clear();
+                    delete this.queries[q];
+                }
+            }
+
+            return this;
+        }
+    };
+
+	return new MediaQueryDispatch();
+
+}));
+},{}],2:[function(require,module,exports){
 (function (global){
 /*!
  * VERSION: 1.18.2
@@ -7582,7 +7876,7 @@ if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); } //necessary in case Tween
 
 })((typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window, "TweenMax");
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 var jQuery = require('jquery');
 
 /*! jQuery UI - v1.10.3 - 2013-05-03
@@ -22589,7 +22883,7 @@ $.widget( "ui.tooltip", {
 
 }( jQuery ) );
 
-},{"jquery":3}],3:[function(require,module,exports){
+},{"jquery":4}],4:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.2.1
  * http://jquery.com/
@@ -32422,7 +32716,7 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /*!
  * ScrollMagic v2.0.5 (2015-04-29)
  * The javascript library for magical scroll interactions.
@@ -35203,7 +35497,7 @@ return jQuery;
 
 	return ScrollMagic;
 }));
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /*!
  * ScrollMagic v2.0.5 (2015-04-29)
  * The javascript library for magical scroll interactions.
@@ -35514,7 +35808,7 @@ return jQuery;
 
 	});
 }));
-},{"gsap":1,"scrollmagic":4}],6:[function(require,module,exports){
+},{"gsap":2,"scrollmagic":5}],7:[function(require,module,exports){
 /*!
  * ScrollMagic v2.0.5 (2015-04-29)
  * The javascript library for magical scroll interactions.
@@ -36187,7 +36481,7 @@ return jQuery;
 	};
 
 }));
-},{"scrollmagic":4}],7:[function(require,module,exports){
+},{"scrollmagic":5}],8:[function(require,module,exports){
 /*!
  * ScrollMagic v2.0.5 (2015-04-29)
  * The javascript library for magical scroll interactions.
@@ -36257,15 +36551,17 @@ return jQuery;
 	};
 	$.ScrollMagic = ScrollMagic;
 }));
-},{"jquery":3,"scrollmagic":4}],8:[function(require,module,exports){
+},{"jquery":4,"scrollmagic":5}],9:[function(require,module,exports){
 //requires
 var $ = require('jquery');
 var jquery_ui = require('jquery-ui');
+var enquire = require('enquire.js');
 var TweenMax = require('gsap');
 var ScrollMagic = require('scrollmagic');
 var animation_gsap = require('./plugin/jquery.ScrollMagic.js');
 var animation_gsap = require('./plugin/animation.gsap.js');
 var debug_addIndicators = require('./plugin/debug.addIndicators.js');
+
 //function ready below!!!
 
 
@@ -36275,15 +36571,39 @@ var debug_addIndicators = require('./plugin/debug.addIndicators.js');
 	
 	//second_nav slide in effect
 	var scndNavXslid = function(){
-			TweenLite.fromTo('#secondary_nav', 0.6, {opacity:.3, width:0 }, {opacity:1, width:130, delay:0.4, ease:Elastic.easeOut});
-			TweenMax.staggerFrom(".btn", 2, {x:-100, scale:0, opacity:0, delay:0.9, ease:Elastic.easeOut}, 0.2);
-			}//function 
+			TweenLite.from('#secondary_nav', 0.6, {opacity:.3, width:0, delay:0.4, ease:Elastic.easeOut});
+			TweenMax.staggerFromTo(".btn", 2, {scale:0, opacity:0,},{ delay:1.9, scale:1, opacity:1, ease:Elastic.easeOut}, 0.2);
+			}//function
+
+	var scndNavXslidOut = function() {
+					TweenLite.to('#secondary_nav', 0.5, {delay:0.8, opacity:0, width:0 });
+					TweenMax.staggerTo(".btn", 1, {scale:0, opacity:0, delay:0.3, ease:Elastic.easeOut}, 0.2);
+			    }
+
 	var scndNavYslid = function(){
 			TweenLite.from('#secondary_nav', 1.3, {opacity:.3, height:0,delay:0.5, ease:Elastic.easeOut});
 			TweenMax.staggerFrom(".btn", 2, {y:-50, scale:0, opacity:0, delay:0.9, ease:Elastic.easeOut}, 0.3);
 			}//function
 
-	
+
+
+
+
+		var	narrow = new ScrollMagic.Scene({
+			triggerElement: '#projects',
+			offset: -10,
+			triggerHook:0,
+			pushFollowers: false
+		})
+
+	var	wide = new ScrollMagic.Scene({
+				triggerElement: '#secondary_nav',
+				offset: 0,
+				triggerHook:0,
+				pushFollowers: false
+		})
+
+
 	//get window height
 function fullheight(selector, tims){
 	var winheight = $(window).height(); 
@@ -36331,52 +36651,38 @@ $(function(){
 
  
  	//ScrollMagic Pin:
+enquire.register("screen and (min-width:980px)", {
+	deferSetup : true,
+	setup : function() {
+        	narrow.on("start", scndNavXslid)
+        	.on("leave", scndNavXslidOut)
+        	.setPin('#secondary_nav ul').addIndicators().addTo(controller)
+    		},
 
-// function scrollPin(){
+	})
+	enquire.register("screen and (max-width:980px)", {
+			
+    	
 
-//   if ($("#secondary_nav").css("float") == "right" ){
-// 		wide.removePin(true);
-// 		narrowAddPin//secondary_nav narrow add pin
-		
-// 	}//if
-// 	else if ($("#secondary_nav").css("float") == "none" ){
-// 		narrow.removePin(true);//secondary_nav removePin
-// 		wideAddPin//secondary_nav wide add pin
-// 	}//else
-// }//scrollPin
+	    match : function(){
+	    	narrow.remove().removePin();
+	    	wide
+	    	.setPin('#secondary_nav')
+	    	.addIndicators()
+	    	.addTo(controller);
+					
+	    	
+	     	},      
+	                                
+	    unmatch : function(){
+	    	wide.remove().removePin();//wide remove
 
-
-// $(window).resize(scrollPin)
-
-
-
-
-
-
-
-
-	// var	scene = new ScrollMagic.Scene({
-	// 	triggerElement: '#nav',
-	// 	offset: 0,
-	// 	triggerHook:0
-	// }).setPin('#secondary_nav').addIndicators().addTo(controller)
-
-	// var	scene = new ScrollMagic.Scene({
-	// 	triggerElement: '#secondary_nav',
-	// 	offset: 0,
-	// 	triggerHook:0
-	// }).setPin('.wide').addTo(controller);		
-	
-
-
-		
-
-
-	
-	
-
-
-
+	    	narrow
+        	.setPin('#secondary_nav ul').addIndicators().addTo(controller)
+				
+	    	},    
+      
+	})
 	//end of pin
 
 	//blur effect
@@ -36412,4 +36718,4 @@ $(function(){
 
 	
 
-},{"./plugin/animation.gsap.js":5,"./plugin/debug.addIndicators.js":6,"./plugin/jquery.ScrollMagic.js":7,"gsap":1,"jquery":3,"jquery-ui":2,"scrollmagic":4}]},{},[8]);
+},{"./plugin/animation.gsap.js":6,"./plugin/debug.addIndicators.js":7,"./plugin/jquery.ScrollMagic.js":8,"enquire.js":1,"gsap":2,"jquery":4,"jquery-ui":3,"scrollmagic":5}]},{},[9]);

@@ -1,11 +1,13 @@
 //requires
 var $ = require('jquery');
 var jquery_ui = require('jquery-ui');
+var enquire = require('enquire.js');
 var TweenMax = require('gsap');
 var ScrollMagic = require('scrollmagic');
 var animation_gsap = require('./plugin/jquery.ScrollMagic.js');
 var animation_gsap = require('./plugin/animation.gsap.js');
 var debug_addIndicators = require('./plugin/debug.addIndicators.js');
+
 //function ready below!!!
 
 
@@ -15,15 +17,39 @@ var debug_addIndicators = require('./plugin/debug.addIndicators.js');
 	
 	//second_nav slide in effect
 	var scndNavXslid = function(){
-			TweenLite.fromTo('#secondary_nav', 0.6, {opacity:.3, width:0 }, {opacity:1, width:130, delay:0.4, ease:Elastic.easeOut});
-			TweenMax.staggerFrom(".btn", 2, {x:-100, scale:0, opacity:0, delay:0.9, ease:Elastic.easeOut}, 0.2);
-			}//function 
+			TweenLite.from('#secondary_nav', 0.6, {opacity:.3, width:0, delay:0.4, ease:Elastic.easeOut});
+			TweenMax.staggerFromTo(".btn", 2, {scale:0, opacity:0,},{ delay:1.9, scale:1, opacity:1, ease:Elastic.easeOut}, 0.2);
+			}//function
+
+	var scndNavXslidOut = function() {
+					TweenLite.to('#secondary_nav', 0.5, {delay:0.8, opacity:0, width:0 });
+					TweenMax.staggerTo(".btn", 1, {scale:0, opacity:0, delay:0.3, ease:Elastic.easeOut}, 0.2);
+			    }
+
 	var scndNavYslid = function(){
 			TweenLite.from('#secondary_nav', 1.3, {opacity:.3, height:0,delay:0.5, ease:Elastic.easeOut});
 			TweenMax.staggerFrom(".btn", 2, {y:-50, scale:0, opacity:0, delay:0.9, ease:Elastic.easeOut}, 0.3);
 			}//function
 
-	
+
+
+
+
+		var	narrow = new ScrollMagic.Scene({
+			triggerElement: '#projects',
+			offset: -10,
+			triggerHook:0,
+			pushFollowers: false
+		})
+
+	var	wide = new ScrollMagic.Scene({
+				triggerElement: '#secondary_nav',
+				offset: 0,
+				triggerHook:0,
+				pushFollowers: false
+		})
+
+
 	//get window height
 function fullheight(selector, tims){
 	var winheight = $(window).height(); 
@@ -71,52 +97,38 @@ $(function(){
 
  
  	//ScrollMagic Pin:
+enquire.register("screen and (min-width:980px)", {
+	deferSetup : true,
+	setup : function() {
+        	narrow.on("start", scndNavXslid)
+        	.on("leave", scndNavXslidOut)
+        	.setPin('#secondary_nav ul').addIndicators().addTo(controller)
+    		},
 
-// function scrollPin(){
+	})
+	enquire.register("screen and (max-width:980px)", {
+			
+    	
 
-//   if ($("#secondary_nav").css("float") == "right" ){
-// 		wide.removePin(true);
-// 		narrowAddPin//secondary_nav narrow add pin
-		
-// 	}//if
-// 	else if ($("#secondary_nav").css("float") == "none" ){
-// 		narrow.removePin(true);//secondary_nav removePin
-// 		wideAddPin//secondary_nav wide add pin
-// 	}//else
-// }//scrollPin
+	    match : function(){
+	    	narrow.remove().removePin();
+	    	wide
+	    	.setPin('#secondary_nav')
+	    	.addIndicators()
+	    	.addTo(controller);
+					
+	    	
+	     	},      
+	                                
+	    unmatch : function(){
+	    	wide.remove().removePin();//wide remove
 
-
-// $(window).resize(scrollPin)
-
-
-
-
-
-
-
-
-	// var	scene = new ScrollMagic.Scene({
-	// 	triggerElement: '#nav',
-	// 	offset: 0,
-	// 	triggerHook:0
-	// }).setPin('#secondary_nav').addIndicators().addTo(controller)
-
-	// var	scene = new ScrollMagic.Scene({
-	// 	triggerElement: '#secondary_nav',
-	// 	offset: 0,
-	// 	triggerHook:0
-	// }).setPin('.wide').addTo(controller);		
-	
-
-
-		
-
-
-	
-	
-
-
-
+	    	narrow
+        	.setPin('#secondary_nav ul').addIndicators().addTo(controller)
+				
+	    	},    
+      
+	})
 	//end of pin
 
 	//blur effect
