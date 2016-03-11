@@ -273,27 +273,28 @@ li {
   filter: blur(0px);
 }
 
-.marked {
+#secondary_nav .marked {
   display: inline-block;
   position: relative;
+  color: #fff !important;
 }
-.marked:after {
+#secondary_nav .marked:after {
   content: '';
   display: block;
   margin: 3px auto auto auto;
   height: 1px;
   width: 0px;
 }
-.marked:after {
+#secondary_nav .marked:after {
   width: 100%;
   background: #fff;
   line-height: 10px;
 }
 
-.unmarked {
+#secondary_nav .unmarked {
   transition: color ease 1s;
 }
-.unmarked:hover {
+#secondary_nav .unmarked:hover {
   color: hotpink;
 }
 
@@ -333,7 +334,7 @@ hr {
   max-width: 94%;
   margin-left: auto;
   margin-right: auto;
-  background-image: url("../images/cover/firstpage2.jpg");
+  background-image: url("http://s23.postimg.org/tw95lhrqj/firstpage2.jpg");
   background-repeat: no-repeat;
   background-position: 50% -225px;
   -webkit-background-size: 1100px;
@@ -360,13 +361,6 @@ hr {
   background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, #000000 50%, rgba(0, 0, 0, 0.7) 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   color: #FFF;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 280%;
-  float: left;
-  margin-left: 10%;
-  margin-right: 10%;
 }
 #cover .fullheightMid .yoworld:after {
   content: " ";
@@ -382,6 +376,37 @@ hr {
   margin: 0;
 }
 
+@media (min-width: 319px) and (max-width: 600px) {
+  #cover .fullheightMid {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("http://s23.postimg.org/tw95lhrqj/firstpage2.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  #cover .fullheightMid:after {
+    content: " ";
+    display: block;
+    clear: both;
+  }
+  #cover .fullheightMid .yoworld {
+    position: relative;
+    top: 21%;
+    text-align: center;
+  }
+  #cover .fullheightMid .yoworld h1 {
+    font-size: 20px;
+    font-size: 1.25rem;
+  }
+}
 #nav {
   z-index: 999;
   display: -webkit-flex;
@@ -427,7 +452,7 @@ hr {
   line-height: 10px;
 }
 
-@media (min-width: 400px) and (max-width: 1019px) {
+@media (min-width: 319px) and (max-width: 1019px) {
   #nav {
     -webkit-justify-content: center;
     justify-content: center;
@@ -460,9 +485,13 @@ hr {
   font-size: 16px;
   font-size: 1rem;
   font-weight: 400;
+  transition: color ease 1s;
+}
+#secondary_nav ul li a:hover {
+  color: hotpink;
 }
 
-@media (min-width: 400px) and (max-width: 980px) {
+@media (min-width: 319px) and (max-width: 980px) {
   #secondary_nav {
     width: 100%;
     display: block;
@@ -488,12 +517,12 @@ hr {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  max-width: 850px;
+  max-width: 90%;
   margin-left: auto;
   margin-right: auto;
+  padding: 17px;
   border: 8px double white;
   background-clip: padding-box;
-  padding: 17px;
   background-color: #98938c;
 }
 #projects .tiles:after {
@@ -501,45 +530,90 @@ hr {
   display: block;
   clear: both;
 }
-#projects .tiles hr {
-  margin: 0;
+#projects .tiles a img {
+  vertical-align: text-bottom;
+  max-width: 100%;
 }
-#projects .tiles a {
+
+@media (min-width: 870px) {
+  #projects .tiles a {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 33.01887%;
+    float: left;
+  }
+  #projects .tiles a .hr {
+    margin-bottom: 2px;
+  }
+  #projects .tiles a:nth-child(3n + 1) {
+    margin-left: 0;
+    margin-right: -100%;
+    clear: both;
+    margin-left: 0;
+  }
+  #projects .tiles a:nth-child(3n + 2) {
+    margin-left: 33.49057%;
+    margin-right: -100%;
+    clear: none;
+  }
+  #projects .tiles a:nth-child(3n + 3) {
+    margin-left: 66.98113%;
+    margin-right: -100%;
+    clear: none;
+  }
+}
+@media (min-width: 600px) and (max-width: 870px) {
+  #projects .tiles {
+    padding: 17px;
+  }
+  #projects .tiles a {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 49.82332%;
+    float: left;
+  }
+  #projects .tiles a:nth-child(2n + 1) {
+    margin-left: 0;
+    margin-right: -100%;
+    clear: both;
+    margin-left: 0;
+  }
+  #projects .tiles a:nth-child(2n + 2) {
+    margin-left: 50.17668%;
+    margin-right: -100%;
+    clear: none;
+  }
+}
+@media (min-width: 319px) and (max-width: 600px) {
+  #projects {
+    display: block;
+  }
+  #projects .tiles {
+    text-align: center;
+  }
+  #projects .tiles a {
+    margin: 0;
+  }
+}
+#about {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  width: 33.01887%;
-  float: left;
-}
-#projects .tiles a:nth-child(3n + 1) {
-  margin-left: 0;
-  margin-right: -100%;
-  clear: both;
-  margin-left: 0;
-}
-#projects .tiles a:nth-child(3n + 2) {
-  margin-left: 33.49057%;
-  margin-right: -100%;
-  clear: none;
-}
-#projects .tiles a:nth-child(3n + 3) {
-  margin-left: 66.98113%;
-  margin-right: -100%;
-  clear: none;
-}
-#projects .tiles a .hr {
-  margin-bottom: 2px;
-}
-#projects .tiles a img {
-  vertical-align: bottom;
-}
-
-#about {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
   align-items: center;
   position: relative;
+}
+#about:after {
+  content: " ";
+  display: block;
+  clear: both;
 }
 #about .profile {
   padding: 120px 0;
@@ -584,9 +658,9 @@ hr {
   text-transform: uppercase;
 }
 #contact address {
-  opacity: 0;
   margin-left: 300px;
   border: double 6px #fff;
+  padding: 20px;
   font-style: normal;
   width: 170px;
   font-family: "Raleway", sans-serif;
@@ -617,10 +691,17 @@ hr {
   margin-right: 15px;
   vertical-align: top;
 }
+#contact address ul li button {
+  background: transparent;
+  border: none;
+}
 #contact address ul li a {
   display: inline-block;
   height: 24px;
   width: 24px;
+}
+#contact address ul li a:active {
+  background-size: 95%;
 }
 #contact address ul li a span {
   font: 0/0 serif;

@@ -20,10 +20,10 @@ $susy: (
 // $shorthand: 12 1/4 fluid float inside;
 
 //breakpoint
-$phone: 	400px		;
-$tablet:	650px 	;
+$phone: 	319px		;
+$tablet:	600px 	;
 $halfWin:	980px 	;
-$firstBreak:	1170px		;
+$firstBreak:1170px		;
 
 //fonts
 
@@ -59,9 +59,10 @@ $beige : #BCB9B4 ;
 
 
 //nav marked
-.marked{
+#secondary_nav .marked{
 	display: inline-block;
 	position: relative;
+	color:#fff !important;
 	&:after {
 		content: '';
 		display: block;
@@ -76,7 +77,8 @@ $beige : #BCB9B4 ;
 	}
 }
 //nav unmarked
-.unmarked{
+#secondary_nav .unmarked{
+
 	transition: color ease 1s;
 	
 	&:hover{

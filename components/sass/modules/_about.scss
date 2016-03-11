@@ -1,4 +1,5 @@
 #about{
+	@include container(90%);
 	display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;

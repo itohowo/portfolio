@@ -2,11 +2,11 @@
 	padding: 0; 
 	background:#222;
 	color:#fff;
-	text-transform: uppercase; 
+	text-transform: uppercase;
 	address{
-		opacity: 0; 
 		margin-left: 300px; 
 		border: double 6px #fff;
+		padding:20px;
 		font-style: normal; 
 		width:170px;
 		@include fontspec('Raleway', #fff, 16px);
@@ -29,11 +29,17 @@
 				
 				margin-right: 15px;
 				vertical-align: top; 
-
+				button{
+					background: transparent;
+					border:none;
+					}
 				a{
 					display: inline-block;
 					height:24px;
 					width: 24px;
+					&:active{
+					background-size: 95%;
+					}
 					span{
 						@include squish-text;
 					}

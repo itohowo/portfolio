@@ -12,7 +12,7 @@
 			background: #000;
 			background: linear-gradient(to right,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,1) 50%,rgba(0,0,0,0.7) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 			color: #FFF; 
-			@include span(3 at 3 of 1);
+			// @include span(3 at 3 of 1);
 			
 			h1{
 				@include fontspec('Courier New',#fff, 26px, $normal);
@@ -21,3 +21,19 @@
 		}//yoworld
 	}//fullheight
 }//cover
+
+@include breakpoint($phone $tablet){
+	#cover{	
+		.fullheightMid{
+			@include container(98%);
+			@include backImg("http://s23.postimg.org/tw95lhrqj/firstpage2.jpg", cover, null);
+			.yoworld{
+				@include position(relative, 21%);
+				text-align: center;
+				h1{
+				@include fontsize(20px);
+				}
+			}
+		}
+	}
+}
