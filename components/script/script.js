@@ -6,7 +6,6 @@ var TweenMax = require('gsap');
 var ScrollMagic = require('scrollmagic');
 var animation_gsap = require('./plugin/jquery.ScrollMagic.js');
 var animation_gsap = require('./plugin/animation.gsap.js');
-var debug_addIndicators = require('./plugin/debug.addIndicators.js');
 var Clipboard = require('clipboard');
 //function ready below!!!
 
@@ -14,52 +13,24 @@ var Clipboard = require('clipboard');
 //ScrollMagic vars
 var controller = new ScrollMagic.Controller();
 var	scene = new ScrollMagic.Scene();
+	
+	var	navTop = new ScrollMagic.Scene({
+			triggerElement: '#cover',
+			offset: 0,
+			triggerHook:0,
+			duration:500,
+		})
 
-//second_nav slide in effect
-
-
-
-	var scndNavYslid = function(){
-		TweenLite.from('#secondary_nav', 1.3, {opacity:.3, height:0,delay:0.5, ease:Elastic.easeOut});
-		TweenMax.staggerFrom(".btn", 2, {y:-50, scale:0, opacity:0, delay:0.9, ease:Elastic.easeOut}, 0.3);
-	}
-
-var sideNavFrom = 
-	{
-		delay:0.4,
-		opacity:0,
-		scale:-0,
-		ease: Back.easeOut.config(2),
-	} 
-var btnsFrom =
-	 {
-	 	scale:0,
-	  opacity:0,
-	  delay:1.2,
-	  ease:Elastic.easeOut
-	}
-
-
-
-
-// var barTween = TweenMax.from("#secondary_nav", 1, sideNavFrom, 0.5)
-
-// var sidNavBtnTween = TweenMax.staggerFrom(".btn", 1.5, btnsFrom, .2 )
-
-
-		var	side = new ScrollMagic.Scene({
+	var	side = new ScrollMagic.Scene({
 			triggerElement: '#projects',
 			offset: -30,
 			triggerHook:0,
-			pushFollowers: false,
-
 		})
 
 	var	wide = new ScrollMagic.Scene({
 				triggerElement: '#secondary_nav',
 				offset: 0,
 				triggerHook:0,
-				pushFollowers: false
 		})
 
 
@@ -78,19 +49,19 @@ function fullheight(selector, tims){
 }
 
 //secondary nav height
+
 function checkSize(){
 
-  if ($("#secondary_nav").css("float") == "right" ){
+  if ($("#secondary_nav").css("float") == "right"){
   	var winheight = $(window).height();
+  	$('#secondary_nav').removeAttr("style");
     $('#secondary_nav').css('height', winheight * 2);	
-
-		$( "#secondary_nav" ).switchClass( "wide", "side");
+		// $( "#secondary_nav" ).switchClass( "wide", "side");
 		
 	}//if
 	else if ($("#secondary_nav").css("float") == "none" ){
 		$('#secondary_nav').removeAttr("style");
-
-		$( "#secondary_nav" ).switchClass( "side", "wide");
+		// $( "#secondary_nav" ).switchClass( "side", "wide");
 
 	}//else
 }//checkSize
@@ -111,43 +82,87 @@ $(function(){
     // run test on resize of the window
     $(window).resize(checkSize);
 
- 
+   //top nav effect
+
+   navTop
+   .setPin('#nav',  {pushFollowers: false})
+	 .addTo(controller);
+
+   $(window).scroll(function(){
+				var windowpos = $(window).scrollTop() - 70;
+					if(windowpos > $('#cover').offset().top){
+					$('#nav').fadeOut(300);
+					}else{
+					$('#nav').fadeIn(700);
+					}
+				});
+
  	//ScrollMagic Pin:
 
  	//class toggles
 	new ScrollMagic.Scene({triggerElement: "#projects", duration:winheight})
 					.setClassToggle("#toprojects", "marked") // add class toggle
-					.addIndicators() // add indicators (requires plugin)
 					.addTo(controller);
 
 	new ScrollMagic.Scene({triggerElement: "#about", duration:winheight})
 					.setClassToggle("#toabout", "marked") // add class toggle
-					.addIndicators() // add indicators (requires plugin)
 					.addTo(controller);
 
 //screen width
- 	enquire.register("screen and (min-width:980px)", {
+ 	enquire.register("screen and (min-width:980px)", [
 
- 			 match : function(){
+ 			 {match : function(){
 	    	wide.remove().removePin();//wide remove
 
 	    	side
 	    	.setPin('#secondary_nav ul')
-	    	.addIndicators()
 	    	.addTo(controller);	
-	    	} 
- 	})
-	enquire.register("screen and (max-width:980px)", {
+	    	}},
 
-	    match : function(){
+	    	{match: function(){
+
+	    	 //nav bar slide in
+				$(window).scroll(function(){
+				var windowpos = $(window).scrollTop() + 150;
+					if(windowpos > $('#projects').offset().top){
+					$('#secondary_nav').show("fold",850);
+					}else{
+					$('#secondary_nav').hide("fold",1000);
+					}
+				});
+
+	    }}
+
+ 	])
+
+	
+	enquire.register("screen and (max-width:980px)", [
+
+	    {match : function(){
 	    	side.remove().removePin();//side remove
 
 	    	wide
 	    	.setPin('#secondary_nav')
-	    	.addIndicators()
 	    	.addTo(controller);
-	     	}  
-	})
+	     	} },
+
+	   	{match : function(){
+	  	
+	   		$(window).scroll(function(){
+
+				var windowpos = $(window).scrollTop() + 150;
+					if(windowpos > $('#projects').offset().top){
+						$('#secondary_nav').show('blind');
+						
+					}else{
+						$('#secondary_nav').hide('blind');
+					}
+				})//window.scro
+
+	   	} },
+
+
+	])
 	//end of pin
 
 	//blur effect
@@ -181,7 +196,7 @@ $(function(){
   //copy to clipboard:
 
   var clipboard = new Clipboard('.social-email');
-  
+
 	clipboard.on('success', function(e) {
 	    console.info('Action:', e.action);
 	    console.info('Text:', e.text);
@@ -195,6 +210,19 @@ $(function(){
 	    console.error('Trigger:', e.trigger);
 	});
 
-});//doc.ready
 
-	
+	$(".social-email").click(function(){
+		$("#contact address").append( "<p id='copied'>Copied</p>" )
+		 $("#copied").show( "fold", 1200 );
+		 callback();
+  });
+	function callback() {
+      setTimeout(function() {
+        $( "#copied" ).fadeOut()
+      }, 300 );
+    };
+    //END copy to clipboard
+
+
+
+});//doc.ready
