@@ -227,7 +227,7 @@ th {
 }
 
 .social-sprite, .social-email, .social-facebook, .social-github {
-  background-image: url('../images/../images/icons/social-s87c09aedc8.png');
+  background-image: url('../images/../images/icons/social-sb8efc87348.png');
   background-repeat: no-repeat;
 }
 
@@ -236,11 +236,11 @@ th {
 }
 
 .social-facebook {
-  background-position: 0 -24px;
+  background-position: 0 -34px;
 }
 
 .social-github {
-  background-position: 0 -48px;
+  background-position: 0 -68px;
 }
 
 a {
@@ -289,13 +289,6 @@ li {
   width: 100%;
   background: #fff;
   line-height: 10px;
-}
-
-#secondary_nav .unmarked {
-  transition: color ease 1s;
-}
-#secondary_nav .unmarked:hover {
-  color: hotpink;
 }
 
 body {
@@ -485,7 +478,7 @@ hr {
   font-size: 16px;
   font-size: 1rem;
   font-weight: 400;
-  transition: color ease 1s;
+  transition: color ease .4s;
 }
 #secondary_nav ul li a:hover {
   color: hotpink;
@@ -652,7 +645,7 @@ hr {
 }
 
 #contact {
-  padding: 0;
+  padding: 50px;
   background: #222;
   color: #fff;
   text-transform: uppercase;
@@ -663,6 +656,7 @@ hr {
   padding: 20px;
   font-style: normal;
   width: 170px;
+  height: 100px;
   font-family: "Raleway", sans-serif;
   color: #fff;
   font-size: 16px;
@@ -678,6 +672,13 @@ hr {
   font-size: 0.875rem;
   letter-spacing: 1px;
 }
+#contact address #copied {
+  display: none;
+  text-transform: capitalize;
+  font-size: 12px;
+  font-size: 0.75rem;
+  margin: 3px 0 0 0;
+}
 #contact address ul {
   display: inline-block;
   padding: 0;
@@ -691,17 +692,15 @@ hr {
   margin-right: 15px;
   vertical-align: top;
 }
-#contact address ul li button {
-  background: transparent;
-  border: none;
+#contact address ul li:active {
+  padding-top: 2px;
 }
 #contact address ul li a {
   display: inline-block;
   height: 24px;
   width: 24px;
-}
-#contact address ul li a:active {
-  background-size: 95%;
+  border: 1px solid #222;
+  border-radius: 5px;
 }
 #contact address ul li a span {
   font: 0/0 serif;

@@ -52,7 +52,7 @@
 				display: inline-block; 
 				text-decoration: none;
 				@include fontspec('Raleway', #fff, 16px, $normal);
-				transition: color ease 1s;
+				transition: color ease .4s;
 				&:hover{
 					color:hotpink;
 				}	

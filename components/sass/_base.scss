@@ -4,11 +4,11 @@
 @import "susy";
 @import "memo";
 @import "breakpoint";
-
-
 //Sprites
+$social-spacing:10px;
 @import "../images/icons/social/*.png";
 @include all-social-sprites;
+
 //susy
 $susy: (
 	columns: 		12,
@@ -75,13 +75,4 @@ $beige : #BCB9B4 ;
 		background: #fff;
 		line-height: 10px; 
 	}
-}
-//nav unmarked
-#secondary_nav .unmarked{
-
-	transition: color ease 1s;
-	
-	&:hover{
-	color:hotpink;
-	}	
 }
