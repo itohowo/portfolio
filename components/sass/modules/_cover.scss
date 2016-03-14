@@ -26,7 +26,7 @@
 	#cover{	
 		.fullheightMid{
 			@include container(98%);
-			@include backImg("http://s23.postimg.org/tw95lhrqj/firstpage2.jpg", cover, null);
+			@include backImg("http://s13.postimg.org/5hv99n4bb/firstpage2.jpg", cover, null);
 			.yoworld{
 				@include position(relative, 21%);
 				text-align: center;
