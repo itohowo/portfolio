@@ -4,13 +4,14 @@
 	color:#fff;
 	text-transform: uppercase;
 	address{
-		margin-left: 300px; 
+		margin-left: 17%; 
 		border: double 6px #fff;
 		padding:20px;
 		font-style: normal; 
 		width:170px;
 		height:100px;
-		@include fontspec('Raleway', #fff, 16px);
+		@include fontspec('Poiret One', #fff, 16px);
+		letter-spacing: 2px; 
 		h4{
 			margin:0;
 
@@ -23,7 +24,7 @@
 		#copied{
 			display: none;
 			text-transform: capitalize;
-			@include fontsize(12px);
+			@include fontspec('Raleway', #fff, 10px, $light);
 			margin: 3px 0 0 0 ;
 			}
 		ul{

@@ -7,9 +7,10 @@ var ScrollMagic = require('scrollmagic');
 var animation_gsap = require('./plugin/jquery.ScrollMagic.js');
 var animation_gsap = require('./plugin/animation.gsap.js');
 var Clipboard = require('clipboard');
+var debug_addIndicators = require('./plugin/debug.addIndicators.js');
 //function ready below!!!
 
-
+var sideHight
 //ScrollMagic vars
 var controller = new ScrollMagic.Controller();
 var	scene = new ScrollMagic.Scene();
@@ -25,6 +26,7 @@ var	scene = new ScrollMagic.Scene();
 			triggerElement: '#projects',
 			offset: -30,
 			triggerHook:0,
+			
 		})
 
 	var	wide = new ScrollMagic.Scene({
@@ -56,12 +58,10 @@ function checkSize(){
   	var winheight = $(window).height();
   	$('#secondary_nav').removeAttr("style");
     $('#secondary_nav').css('height', winheight * 2);	
-		// $( "#secondary_nav" ).switchClass( "wide", "side");
 		
 	}//if
 	else if ($("#secondary_nav").css("float") == "none" ){
 		$('#secondary_nav').removeAttr("style");
-		// $( "#secondary_nav" ).switchClass( "side", "wide");
 
 	}//else
 }//checkSize
@@ -78,7 +78,7 @@ $(function(){
 	//secondary nav heigh
 		 // run test on initial page load
     checkSize();
-
+    
     // run test on resize of the window
     $(window).resize(checkSize);
 
@@ -108,19 +108,26 @@ $(function(){
 					.setClassToggle("#toabout", "marked") // add class toggle
 					.addTo(controller);
 
+	new ScrollMagic.Scene({triggerElement: "#contact", offset: "-295%"})
+					.setClassToggle("#tocontact", "marked") // add class toggle
+					.addTo(controller);
 //screen width
  	enquire.register("screen and (min-width:980px)", [
 
  			 {match : function(){
 	    	wide.remove().removePin();//wide remove
 
+				//secondary_nav hight for pin duration
+				var sideHight = $('#secondary_nav').css('height')
+				side.duration(winheight * 2)
+
 	    	side
-	    	.setPin('#secondary_nav ul')
+	    	
+	    	.setPin('#secondary_nav ul', {pushFollowers: false})
 	    	.addTo(controller);	
 	    	}},
 
 	    	{match: function(){
-
 	    	 //nav bar slide in
 				$(window).scroll(function(){
 				var windowpos = $(window).scrollTop() + 150;
@@ -152,7 +159,7 @@ $(function(){
 
 				var windowpos = $(window).scrollTop() + 150;
 					if(windowpos > $('#projects').offset().top){
-						$('#secondary_nav').show('blind');
+						$('#secondary_nav').slideDown(600,"easeInOutBack");
 						
 					}else{
 						$('#secondary_nav').hide('blind');
@@ -179,6 +186,9 @@ $(function(){
 			})
 		})
 
+
+
+
 		//smooth mouse
   $('a[href*="#"]:not([href="#"])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -196,20 +206,6 @@ $(function(){
   //copy to clipboard:
 
   var clipboard = new Clipboard('.social-email');
-
-	clipboard.on('success', function(e) {
-	    console.info('Action:', e.action);
-	    console.info('Text:', e.text);
-	    console.info('Trigger:', e.trigger);
-
-	    e.clearSelection();
-	});
-
-	clipboard.on('error', function(e) {
-	    console.error('Action:', e.action);
-	    console.error('Trigger:', e.trigger);
-	});
-
 
 	$(".social-email").click(function(){
 		$("#contact address").append( "<p id='copied'>Copied</p>" )

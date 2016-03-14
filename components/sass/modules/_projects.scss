@@ -5,7 +5,6 @@
   -webkit-align-items: center;
   align-items: center;
   display: flex;
-   -webkit-flex-wrap: wrap;
   position: relative;
 	.tiles{
 		@include container(90%);
@@ -45,6 +44,7 @@
 }//firstBreak
 @include breakpoint($phone $tablet){
 	#projects{
+		overflow-y:auto; 
 		display:block;
 		.tiles{
 			text-align: center;

@@ -12,5 +12,5 @@ images_dir = "development/images"
 javascripts_dir = "development/script"
 line_comments = false
 preferred_syntax = :scss
-output_style = :expanded
+output_style = :compressed
 relative_assets = true
